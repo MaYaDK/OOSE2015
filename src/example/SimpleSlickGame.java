@@ -7,7 +7,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+<<<<<<< HEAD
 //DOES IT WORKKK ??? YES IT DOES... May be
+=======
+//Team play wins the day
+>>>>>>> origin/master
 
 public class SimpleSlickGame extends BasicGame
 {
