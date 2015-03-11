@@ -7,6 +7,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+DOES IT WORKKK ???
+
 public class SimpleSlickGame extends BasicGame
 {
 	public SimpleSlickGame(String gamename)
