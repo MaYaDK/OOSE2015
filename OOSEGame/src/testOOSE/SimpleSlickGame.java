@@ -7,10 +7,6 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-//Sound
-import java.io.*;
-import javax.sound.sampled.*;
-import java.net.URL;
 
 public class SimpleSlickGame extends BasicGame
 {
