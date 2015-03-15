@@ -1,4 +1,3 @@
-package example;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
@@ -6,12 +5,10 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-
-<<<<<<< HEAD
-//DOES IT WORKKK ??? YES IT DOES... May be
-=======
-//Team play wins the day
->>>>>>> origin/master
+//Sound
+import java.io.*;
+import javax.sound.sampled.*;
+import java.net.URL;
 
 public class SimpleSlickGame extends BasicGame
 {
