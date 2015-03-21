@@ -1,44 +1,67 @@
 package testOOSE;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+//Access keyboard
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+//Access window
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+//Access graphics
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class SimpleSlickGame extends BasicGame
-{
-	public SimpleSlickGame(String gamename)
+public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener{
+	Timer tm = new Timer(5, this); //for animation
+	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
+	
+	public SimpleSlickGame() //
 	{
-		super(gamename);
+		tm.start(); //start timer
+		addKeyListener(this); //Not interfering
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
 	}
 
-	@Override
-	public void init(GameContainer gc) throws SlickException {}
-
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException {}
-
-	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException
+	public void paintComponent(Graphics g)
 	{
-		g.drawString("Hello World!", 250, 200);
+		super.paintComponent(g);
+		g.setColor(Color.BLUE);
+		g.fillRect(xRect,yRect,rectWidth,rectHeight);
 	}
-
+	public void actionPerformed(ActionEvent e){
+		//Player one
+		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
+		yRect = yRect + velY;
+		repaint();
+	}
+	public void keyPressed(KeyEvent e){
+		int c = e.getKeyCode();
+		//Player movement
+		if(c == KeyEvent.VK_LEFT){ //Moving player left
+			velX = -1;
+			velY = 0;
+		}
+		if(c == KeyEvent.VK_RIGHT){ //Moving player right
+			velX = 1;
+			velY = 0;
+		}
+	}
+	public void keyTyped(KeyEvent e){}
+	public void keyReleased(KeyEvent e){
+//		velX = 0;
+//		velY = 0;
+	}
 	public static void main(String[] args)
 	{
-		try
-		{
-			AppGameContainer appgc;
-			appgc = new AppGameContainer(new SimpleSlickGame("Simple Slick Game"));
-			appgc.setDisplayMode(640, 480, false);
-			appgc.start();
-		}
-		catch (SlickException ex)
-		{
-			Logger.getLogger(SimpleSlickGame.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		SimpleSlickGame t = new SimpleSlickGame();
+		JFrame jf = new JFrame();
+		jf.setTitle("Breakout"); //Displaying the title on the frame
+		jf.setSize(640, 480); //Setting size of frame (x,y);
+		jf.setVisible(true); //Display the frame.
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		jf.add(t);
 	}
 }
