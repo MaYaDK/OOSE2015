@@ -51,8 +51,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	}
 	public void keyTyped(KeyEvent e){}
 	public void keyReleased(KeyEvent e){
-//		velX = 0;
-//		velY = 0;
+		velX = 0;
+		velY = 0;
 	}
 	public static void main(String[] args)
 	{
