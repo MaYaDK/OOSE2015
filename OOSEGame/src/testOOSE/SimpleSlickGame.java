@@ -30,7 +30,21 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
-	}
+		
+		int blockPlaceX = 10;
+		int blockPlaceY = 10;
+		int blockwidth = 100;
+		int blockheight = 40;
+		
+		g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+		
+		
+		}
+	//public void DrawBlocks(int blockPlaceX, int blockPlaceY,int blockwidth, int blockheight) {
+	
+		 
+	//}
+	
 	public void actionPerformed(ActionEvent e){
 		//Player one
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
