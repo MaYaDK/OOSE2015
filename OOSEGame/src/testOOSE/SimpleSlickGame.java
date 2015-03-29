@@ -31,20 +31,34 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
 		
-		int blockPlaceX = 10;
+		int blockPlaceX = 0;
 		int blockPlaceY = 10;
 		int blockwidth = 100;
-		int blockheight = 40;
+		int blockheight = 30;
 		
-		g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
 		
+		//while(blockPlaceX <= 640 ){
+		//blockPlaceX = blockPlaceX+blockwidth +10;
+		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+		
+		//}
+		
+		for( blockPlaceX = 0; blockPlaceX < 640; blockPlaceX = blockPlaceX+blockwidth+20) {
+			for(blockPlaceY = 0; blockPlaceY < 250; blockPlaceY=blockPlaceY+blockheight+20){
+			g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+			g.setColor(Color.BLACK);
+			g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);
+			}			
+			
+		}
+		//(blockPlaceY <= 300 ){
+		//blockPlaceY = blockPlaceY+blockheight+10;
+		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+		//}	
 		
 		}
-	//public void DrawBlocks(int blockPlaceX, int blockPlaceY,int blockwidth, int blockheight) {
-	
-		 
-	//}
-	
+
 	public void actionPerformed(ActionEvent e){
 		//Player one
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
