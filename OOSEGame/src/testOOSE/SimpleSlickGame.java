@@ -17,6 +17,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 {
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
+	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
 		
 	public SimpleSlickGame() //
 	{
@@ -29,14 +30,10 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		//Draw player
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
-		
-	    int blockPlaceX = 0;
-	    int blockPlaceY = 10;
-	    int blockwidth = 100;
-	    int blockheight = 30;
-
+		//Draw blocks
 	    for( blockPlaceX = 0; blockPlaceX < 640; blockPlaceX = blockPlaceX+blockwidth+20) {
 	        for(blockPlaceY = 0; blockPlaceY < 250; blockPlaceY=blockPlaceY+blockheight+20){
 	            g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
@@ -47,14 +44,14 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
         }
 
 	public void actionPerformed(ActionEvent e){
-		//Player one
+		//Move player
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
 		yRect = yRect + velY;
 		repaint();
 	}
 	public void keyPressed(KeyEvent e){
 		int c = e.getKeyCode();
-		//Player movement
+		//Player movement by pressing key
 		if(c == KeyEvent.VK_LEFT){ //Moving player left
 			velX = -1;
 			velY = 0;
@@ -66,6 +63,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	}
 	public void keyTyped(KeyEvent e){}
 	public void keyReleased(KeyEvent e){
+		//Stops the player movement when key released.
 		velX = 0;
 		velY = 0;
 	}
