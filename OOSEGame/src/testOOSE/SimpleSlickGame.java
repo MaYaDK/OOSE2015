@@ -16,32 +16,18 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-//
-import java.net.*;
-import java.io.*;
-//Delete
-//Animation
-import javax.swing.JLabel;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
 {
-	//Delete
-	JLabel imageLabel = new JLabel(); //animation
-	//
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
 	private BufferedImage ball;
     int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
-    int xBallCenter = xBall - ballWidth / 2;
-    int yBallCenter = yBall - ballHeight / 2;
-
-	//URL imageURL = this.getClass().getResource("/resources/Ball.png");
+    int xBallCenter = xBall - ballWidth / 2, yBallCenter = yBall - ballHeight / 2;
 	
-	public SimpleSlickGame() //
+	public SimpleSlickGame()
 	{
 		tm.start(); //start timer
 		addKeyListener(this); //Not interfering
@@ -49,19 +35,15 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
 		try{
 			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
-		}catch(IOException ex){
+			}catch(IOException ex){
+		}
 	}
-}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		//Draw ball
-		g.drawImage(ball, 300, 300, 50, 50, null);
-        //g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
-
-        g.fillOval(xBall, yBall, ballWidth, ballHeight);
-
+        g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
 		//Draw player
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
@@ -75,7 +57,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	    	}
         }
 
-	public void actionPerformed(ActionEvent e){
+	public void actionPerformed(ActionEvent e)
+	{
 		//Move player
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
 		yRect = yRect + velY;
@@ -85,7 +68,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
         yBall = yBall + ballVelY;
 		repaint();
 	}
-    public void moveBall(){
+    public void moveBall()
+    {
         //wall bouncing
         if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
             ballVelX = ballVelX*-1;
@@ -97,7 +81,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
         }
     }
 
-	public void keyPressed(KeyEvent e){
+	public void keyPressed(KeyEvent e)
+	{
 		int c = e.getKeyCode();
 		//Player movement by pressing key
 		if(c == KeyEvent.VK_LEFT){ //Moving player left
@@ -110,7 +95,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		}
 	}
 	public void keyTyped(KeyEvent e){}
-	public void keyReleased(KeyEvent e){
+	public void keyReleased(KeyEvent e)
+	{
 		//Stops the player movement when key released.
 		velX = 0;
 		velY = 0;
