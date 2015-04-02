@@ -20,12 +20,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
 {
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
 	private BufferedImage ball;
+	int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
+	int xBallCenter = xBall - ballWidth / 2;
+	int yBallCenter = yBall - ballHeight / 2;
 	
 	public SimpleSlickGame() //
 	{
@@ -38,13 +42,16 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		}
 		catch(IOException ex){
 		}
+		
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		//Draw player
-		g.drawImage(ball, 300, 300, 100, 100, null);
+		g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
+		
+		g.fillOval(xBall, yBall, ballWidth, ballHeight);
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
 		//Draw blocks
@@ -57,13 +64,33 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	    	}
 	    
         }
-
+	
+	//Character class
+	
 	public void actionPerformed(ActionEvent e){
 		//Move player
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
 		yRect = yRect + velY;
+		//Move ball
+		moveBall();
+		xBall = xBall + ballVelX;
+		yBall = yBall + ballVelY;
 		repaint();
 	}
+	
+	public void moveBall(){
+		//wall bouncing
+		if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
+			ballVelX = ballVelX*-1;
+			System.out.println(xBall);
+		}
+		if ((yBall + 10) >= 420 || (yBall + 10) <= 0){
+			ballVelY = ballVelY*-1;
+			System.out.println(yBall);
+		}
+		
+	}
+	
 	public void keyPressed(KeyEvent e){
 		int c = e.getKeyCode();
 		//Player movement by pressing key
@@ -91,5 +118,6 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		jf.setVisible(true); //Display the frame.
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		jf.add(t);
+		
 	}
 }
