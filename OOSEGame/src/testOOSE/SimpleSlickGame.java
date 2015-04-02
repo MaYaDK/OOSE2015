@@ -1,4 +1,4 @@
-//package testOOSE;
+package testOOSE;
 
 //Access keyboard
 import java.awt.event.ActionEvent;
@@ -16,8 +16,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
@@ -25,7 +23,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
-	private BufferedImage ball;
+	private BufferedImage ballImg;
 	
 	public SimpleSlickGame() //
 	{
@@ -34,17 +32,17 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
 		try{
-			ball = ImageIO.read(new File("Ball.png"));
-		}
-		catch(IOException ex){
-		}
+			ballImg = ImageIO.read(new File("src/testOOSE/Ball.png"));
+		}catch(IOException ex){
 	}
+}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		//Draw ball
+		g.drawImage(ballImg, 300, 300, 50, 50, null);
 		//Draw player
-		g.drawImage(ball, 300, 300, 100, 100, null);
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
 		//Draw blocks
@@ -55,7 +53,6 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	            g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);
 	            }  
 	    	}
-	    
         }
 
 	public void actionPerformed(ActionEvent e){
