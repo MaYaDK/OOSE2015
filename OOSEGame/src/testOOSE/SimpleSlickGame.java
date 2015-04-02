@@ -16,14 +16,30 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+//
+import java.net.*;
+import java.io.*;
+//Delete
+//Animation
+import javax.swing.JLabel;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
 {
+	//Delete
+	JLabel imageLabel = new JLabel(); //animation
+	//
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
-	private BufferedImage ballImg;
+	private BufferedImage ball;
+    int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
+    int xBallCenter = xBall - ballWidth / 2;
+    int yBallCenter = yBall - ballHeight / 2;
+
+	//URL imageURL = this.getClass().getResource("/resources/Ball.png");
 	
 	public SimpleSlickGame() //
 	{
@@ -32,7 +48,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
 		try{
-			ballImg = ImageIO.read(new File("src/testOOSE/Ball.png"));
+			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
 		}catch(IOException ex){
 	}
 }
@@ -41,7 +57,11 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	{
 		super.paintComponent(g);
 		//Draw ball
-		g.drawImage(ballImg, 300, 300, 50, 50, null);
+		g.drawImage(ball, 300, 300, 50, 50, null);
+        //g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
+
+        g.fillOval(xBall, yBall, ballWidth, ballHeight);
+
 		//Draw player
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
@@ -59,8 +79,24 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		//Move player
 		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
 		yRect = yRect + velY;
+        //Move ball
+        moveBall();
+        xBall = xBall + ballVelX;
+        yBall = yBall + ballVelY;
 		repaint();
 	}
+    public void moveBall(){
+        //wall bouncing
+        if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
+            ballVelX = ballVelX*-1;
+            System.out.println(xBall);
+        }
+        if ((yBall + 10) >= 420 || (yBall + 10) <= 0){
+            ballVelY = ballVelY*-1;
+            System.out.println(yBall);
+        }
+    }
+
 	public void keyPressed(KeyEvent e){
 		int c = e.getKeyCode();
 		//Player movement by pressing key
