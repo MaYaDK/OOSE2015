@@ -12,38 +12,27 @@ import javax.swing.Timer;
 //Access graphics
 import java.awt.Color;
 import java.awt.Graphics;
-//Import picture
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
 {
-	Timer tm = new Timer(5, this); //for animation
+	Ball b; //Initialize the Ball class
+	Timer tm = new Timer(5, this); //For animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	int blockPlaceX = 0, blockPlaceY = 10, blockwidth = 100, blockheight = 30;
-	private BufferedImage ball;
-    int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
-    int xBallCenter = xBall - ballWidth / 2, yBallCenter = yBall - ballHeight / 2;
 	
 	public SimpleSlickGame()
 	{
-		tm.start(); //start timer
+		b = new Ball(); //Declaring the Ball class.
+		tm.start(); //Start timer
 		addKeyListener(this); //Not interfering
 		setFocusable(true);
-		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
-		try{
-			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
-			}catch(IOException ex){
-		}
+		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys	
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		//Draw ball
-        g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
+		b.drawBall(g); //Receiving the draw Ball method from Ball class.
 		//Draw player
 		g.setColor(Color.BLUE);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
@@ -60,26 +49,13 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	public void actionPerformed(ActionEvent e)
 	{
 		//Move player
-		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
-		yRect = yRect + velY;
-        //Move ball
-        moveBall();
-        xBall = xBall + ballVelX;
-        yBall = yBall + ballVelY;
+		xRect = xRect + velX*3; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
+		yRect = yRect + velY*3;
+        //Move ball and bounce when hitting end of screen.
+        b.moveBall(); //Receiving the moveBall method from Ball class.
+        b.collisionScreen(); //Receiving the collision with screen method from Ball class.
 		repaint();
 	}
-    public void moveBall()
-    {
-        //wall bouncing
-        if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
-            ballVelX = ballVelX*-1;
-            System.out.println(xBall);
-        }
-        if ((yBall + 10) >= 420 || (yBall + 10) <= 0){
-            ballVelY = ballVelY*-1;
-            System.out.println(yBall);
-        }
-    }
 
 	public void keyPressed(KeyEvent e)
 	{
