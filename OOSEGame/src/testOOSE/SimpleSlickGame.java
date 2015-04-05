@@ -46,8 +46,17 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
         b.moveBall(); //Receiving the moveBall method from Ball class.
         b.collisionScreen(); //Receiving the collision with screen method from Ball class.
         p.movePlayer();
+        collisionPlayerBall();
 		repaint();
 	}
+	
+	public void collisionPlayerBall(){
+        if(b.yBall > p.yRect && b.yBall < p.yRect + p.rectHeight && b.xBall > p.xRect && b.xBall < p.xRect + p.rectWidth){ //if there is the ball is within the players position.
+			System.out.println("Collision!"); //Debug
+			b.ballVelY = b.ballVelY*-1;
+    	}
+	}
+	
 	public void keyPressed(KeyEvent e)
 	{
 		int c = e.getKeyCode();

@@ -9,12 +9,15 @@ import javax.imageio.ImageIO;
 
 public class Ball 
 {
+	//Player p; //initialize class
 	int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
     int xBallCenter = xBall - ballWidth / 2, yBallCenter = yBall - ballHeight / 2;
     private BufferedImage ball;
     
     public Ball()
     {
+    	//p = new Player(); //declare class
+    			
     	try{
 			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
 			}catch(IOException ex){
@@ -40,4 +43,12 @@ public class Ball
             System.out.println(yBall); //Debug purpose
         }
     }
+    /*
+  public void collisionPlayer(){
+        if(yBall > p.yRect && yBall < p.yRect + p.rectHeight && xBall > p.xRect && xBall < p.xRect + p.rectWidth){ //if there is the ball is within the players position.
+			System.out.println("Collision!");
+			ballVelY = ballVelY*-1;
+    	}
+	}
+	*/
 }
