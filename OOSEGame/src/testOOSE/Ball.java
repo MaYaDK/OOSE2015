@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+//Sound
+import java.io.*;
+import javax.sound.sampled.*;
+import java.net.URL;
 
 public class Ball 
 {
@@ -20,8 +24,27 @@ public class Ball
     			
     	try{
 			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
-			}catch(IOException ex){
+		}catch(IOException ex){
 		}
+    }
+    	//Playsound
+    	public void wallSound(){
+        try {
+          // Open an audio input stream.
+          URL url = this.getClass().getClassLoader().getResource("click.wav");
+          AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+          // Get a sound clip resource.
+          Clip clip = AudioSystem.getClip();
+          // Open audio clip and load samples from the audio input stream.
+          clip.open(audioIn);
+          clip.start();
+       } catch (UnsupportedAudioFileException e) {
+          e.printStackTrace();
+       } catch (IOException e) {
+          e.printStackTrace();
+       } catch (LineUnavailableException e) {
+          e.printStackTrace();
+       }
     }
     public void drawBall(Graphics g)
     {
@@ -37,10 +60,12 @@ public class Ball
         if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
             ballVelX = ballVelX*-1;
             System.out.println(xBall); //Debug purpose
+            wallSound();
         }
         if ((yBall + 10) >= 420 || (yBall + 10) <= 0){
             ballVelY = ballVelY*-1;
             System.out.println(yBall); //Debug purpose
+            wallSound();
         }
     }
     /*
