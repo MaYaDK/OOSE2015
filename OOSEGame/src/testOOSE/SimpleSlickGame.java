@@ -19,6 +19,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Ball b; 
 	Block bl;
 	Player p;
+	Sound s = new Sound();
 	Timer tm = new Timer(5, this); //For animation
 	
 	public SimpleSlickGame()
@@ -54,7 +55,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
         if(b.yBall > p.yRect && b.yBall < p.yRect + p.rectHeight && b.xBall > p.xRect && b.xBall < p.xRect + p.rectWidth){ //if there is the ball is within the players position.
 			System.out.println("Collision Player/Ball!"); //Debug
 			b.ballVelY = b.ballVelY*-1;
-			//b.playsound();
+			s.playerSound();
     	}
 	}
 	

@@ -14,6 +14,7 @@ import java.net.URL;
 public class Ball 
 {
 	//Player p; //initialize class
+	Sound s;//initialize class
 	int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
     int xBallCenter = xBall - ballWidth / 2, yBallCenter = yBall - ballHeight / 2;
     private BufferedImage ball;
@@ -21,31 +22,14 @@ public class Ball
     public Ball()
     {
     	//p = new Player(); //declare class
+    	s = new Sound(); //declare class
     			
     	try{
 			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
 		}catch(IOException ex){
 		}
     }
-    	//Playsound
-    	public void wallSound(){
-        try {
-          // Open an audio input stream.
-          URL url = this.getClass().getClassLoader().getResource("click.wav");
-          AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-          // Get a sound clip resource.
-          Clip clip = AudioSystem.getClip();
-          // Open audio clip and load samples from the audio input stream.
-          clip.open(audioIn);
-          clip.start();
-       } catch (UnsupportedAudioFileException e) {
-          e.printStackTrace();
-       } catch (IOException e) {
-          e.printStackTrace();
-       } catch (LineUnavailableException e) {
-          e.printStackTrace();
-       }
-    }
+    	
     public void drawBall(Graphics g)
     {
         g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
@@ -60,12 +44,12 @@ public class Ball
         if ((xBall + 10)  >= 640 || (xBall + 10) <= 0){
             ballVelX = ballVelX*-1;
             System.out.println(xBall); //Debug purpose
-            wallSound();
+            s.wallSound();
         }
         if ((yBall + 10) >= 420 || (yBall + 10) <= 0){
             ballVelY = ballVelY*-1;
             System.out.println(yBall); //Debug purpose
-            wallSound();
+            s.wallSound();
         }
     }
     /*
