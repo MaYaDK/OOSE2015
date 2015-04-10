@@ -16,6 +16,7 @@ import java.awt.Graphics;
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener{
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
+	boolean rectvis = true;
 	
 	public SimpleSlickGame() //
 	{
@@ -36,28 +37,16 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		int blockwidth = 100;
 		int blockheight = 30;
 		
-		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
-		
-		//while(blockPlaceX <= 640 ){
-		//blockPlaceX = blockPlaceX+blockwidth +10;
-		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
-		
-		//}
 		
 		for( blockPlaceX = 0; blockPlaceX < 640; blockPlaceX = blockPlaceX+blockwidth+20) {
 			for(blockPlaceY = 0; blockPlaceY < 250; blockPlaceY=blockPlaceY+blockheight+20){
-			g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
 			g.setColor(Color.BLACK);
 			g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);
-			}			
-			
-		}
-		//(blockPlaceY <= 300 ){
-		//blockPlaceY = blockPlaceY+blockheight+10;
-		//g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
-		//}	
-		
-		}
+			g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
+					    }
+			}
+
+			}
 
 	public void actionPerformed(ActionEvent e){
 		//Player one
@@ -76,6 +65,11 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 			velX = 1;
 			velY = 0;
 		}
+		
+		//if(c == KeyEvent.VK_A){
+			//a = true;
+			//System.out.println("A pressed");
+			//}
 	}
 	public void keyTyped(KeyEvent e){}
 	public void keyReleased(KeyEvent e){
