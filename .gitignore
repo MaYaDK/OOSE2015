@@ -10,6 +10,8 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.recommenders
+.metadata
 
 # Eclipse Core
 .project

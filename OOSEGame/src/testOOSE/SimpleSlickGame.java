@@ -17,6 +17,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Timer tm = new Timer(5, this); //for animation
 	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
 	boolean rectvis = true;
+	boolean a = false;
 	
 	public SimpleSlickGame() //
 	{
@@ -45,7 +46,12 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 			g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
 					    }
 			}
-
+	
+		if (a == true){ 
+			System.out.println("apressed true");	
+			g.setColor(Color.YELLOW);
+		    g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);			
+			}
 			}
 
 	public void actionPerformed(ActionEvent e){
