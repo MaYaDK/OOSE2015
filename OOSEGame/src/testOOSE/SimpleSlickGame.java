@@ -13,74 +13,71 @@ import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener{
-	Timer tm = new Timer(5, this); //for animation
-	int xRect = 300, yRect = 400, rectWidth = 100, rectHeight = 20, velX = 0, velY = 0; //vel = speed;
-	boolean rectvis = true;
-	boolean a = false;
+public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
+{
+	//Initialize the classes.
+	Ball b; 
+	Block bl;
+	Player p;
+	Sound s = new Sound();
+	Timer tm = new Timer(5, this); //For animation
 	
-	public SimpleSlickGame() //
+	public SimpleSlickGame()
 	{
-		tm.start(); //start timer
+		//Declaring the classes.
+		b = new Ball(); 
+		bl = new Block();
+		p = new Player();
+		tm.start(); //Start timer
 		addKeyListener(this); //Not interfering
 		setFocusable(true);
-		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys
+		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys	
 	}
-
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.fillRect(xRect,yRect,rectWidth,rectHeight);
-		
-		int blockPlaceX = 0;
-		int blockPlaceY = 10;
-		int blockwidth = 100;
-		int blockheight = 30;
-		
-		
-		for( blockPlaceX = 0; blockPlaceX < 640; blockPlaceX = blockPlaceX+blockwidth+20) {
-			for(blockPlaceY = 0; blockPlaceY < 250; blockPlaceY=blockPlaceY+blockheight+20){
-			g.setColor(Color.BLACK);
-			g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);
-			g.drawRect (blockPlaceX, blockPlaceY, blockwidth, blockheight);
-					    }
-			}
-	
-		if (a == true){ 
-			System.out.println("apressed true");	
-			g.setColor(Color.YELLOW);
-		    g.fillRect(blockPlaceX, blockPlaceY, blockwidth, blockheight);			
-			}
-			}
+		b.drawBall(g); //Receiving the draw Ball method from Ball class.
+		bl.drawBlock(g);
+		p.drawPlayer(g);
+        }
 
-	public void actionPerformed(ActionEvent e){
-		//Player one
-		xRect = xRect + velX; //Initialize x = 0. If press 1 x = 1. 0+1 = 1. Create movement by increasing x with the amount of velX.
-		yRect = yRect + velY;
+	public void actionPerformed(ActionEvent e)
+	{
+        b.moveBall(); //Receiving the moveBall method from Ball class.
+        b.collisionScreen(); //Receiving the collision with screen method from Ball class.
+        p.movePlayer();
+        collisionPlayerBall();
 		repaint();
 	}
-	public void keyPressed(KeyEvent e){
+	
+	public void collisionPlayerBall(){
+        if(b.yBall > p.yRect && b.yBall < p.yRect + p.rectHeight && b.xBall > p.xRect && b.xBall < p.xRect + p.rectWidth){ //if there is the ball is within the players position.
+			System.out.println("Collision Player/Ball!"); //Debug
+			b.ballVelY = b.ballVelY*-1;
+			s.playerSound();
+    	}
+	}
+	
+	public void keyPressed(KeyEvent e)
+	{
 		int c = e.getKeyCode();
-		//Player movement
+		//Player movement by pressing key
 		if(c == KeyEvent.VK_LEFT){ //Moving player left
-			velX = -1;
-			velY = 0;
+			p.velX = -1;
+			p.velY = 0;
 		}
 		if(c == KeyEvent.VK_RIGHT){ //Moving player right
-			velX = 1;
-			velY = 0;
+			p.velX = 1;
+			p.velY = 0;
 		}
-		
-		//if(c == KeyEvent.VK_A){
-			//a = true;
-			//System.out.println("A pressed");
-			//}
 	}
 	public void keyTyped(KeyEvent e){}
-	public void keyReleased(KeyEvent e){
-		velX = 0;
-		velY = 0;
+	public void keyReleased(KeyEvent e)
+	{
+		//Stops the player movement when key released.
+		p.velX = 0;
+		p.velY = 0;
 	}
 	public static void main(String[] args)
 	{
