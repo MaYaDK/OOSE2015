@@ -18,6 +18,7 @@ public class Ball
 	int xBall = 320, yBall = 360, ballWidth = 20, ballHeight = 20, ballVelX = 2, ballVelY = -2; //vel = speed;
     int xBallCenter = xBall - ballWidth / 2, yBallCenter = yBall - ballHeight / 2;
     private BufferedImage ball;
+    int lifeCounter = 5;
     
     public Ball()
     {
@@ -33,6 +34,7 @@ public class Ball
     public void drawBall(Graphics g)
     {
         g.drawImage(ball, xBall, yBall, ballWidth, ballHeight, null);
+        g.drawString("Life "+lifeCounter, 10, 400);
     }
     public void moveBall()
     {
@@ -51,6 +53,14 @@ public class Ball
             System.out.println(yBall); //Debug purpose
             s.wallSound();
         }
+        if ((yBall + 10) >= 420){
+        	if (lifeCounter > 0){
+        	lifeCounter = lifeCounter - 1;
+        	}
+        }
+        
+        
+        }
     }
     /*
   public void collisionPlayer(){
@@ -60,4 +70,3 @@ public class Ball
     	}
 	}
 	*/
-}
