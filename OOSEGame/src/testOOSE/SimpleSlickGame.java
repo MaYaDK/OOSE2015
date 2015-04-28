@@ -5,13 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 //Access window
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+
 //Access graphics
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
 {
@@ -21,6 +28,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Player p;
 	Sound s = new Sound();
 	Timer tm = new Timer(5, this); //For animation
+	private BufferedImage won; 
 	
 	boolean is1Hit = false;
 	boolean is2Hit = false;
@@ -34,6 +42,9 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	boolean is9Hit = false;
 	boolean is10Hit = false;
 	
+	boolean won_game = false;
+	
+		
 	public SimpleSlickGame()
 	{
 		//Declaring the classes.
@@ -44,6 +55,11 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		addKeyListener(this); //Not interfering
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys	
+		
+		try{
+			won = ImageIO.read(new File("src/testOOSE/3FYIF00Z.jpg"));
+		}catch(IOException ex){
+		}
 	}
 	
 	public void paintComponent(Graphics g)
@@ -83,6 +99,12 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		}
 		if(is10Hit == false){
 			bl.drawBlock10(g);
+		}
+		
+		if(is1Hit == true && is2Hit == true && is3Hit == true && is4Hit == true &&is5Hit == true&&is6Hit == true&&is7Hit == true&&is8Hit == true&&is9Hit == true&&is10Hit == true){
+			won_game = true;
+			System.out.println("you won the game");
+			g.drawImage(won, 0, 0, 640, 480, null);
 		}
 	}
 
