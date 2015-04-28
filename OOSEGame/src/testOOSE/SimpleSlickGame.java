@@ -29,6 +29,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Sound s = new Sound();
 	Timer tm = new Timer(5, this); //For animation
 	private BufferedImage won; 
+	private BufferedImage loose; 
 	
 	boolean is1Hit = false;
 	boolean is2Hit = false;
@@ -58,6 +59,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		
 		try{
 			won = ImageIO.read(new File("src/testOOSE/3FYIF00Z.jpg"));
+			loose =ImageIO.read(new File("src/testOOSE/fat.jpg"));
 		}catch(IOException ex){
 		}
 	}
@@ -105,6 +107,9 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 			won_game = true;
 			System.out.println("you won the game");
 			g.drawImage(won, 0, 0, 640, 480, null);
+		}
+		if(b.lifeCounter==0){
+			g.drawImage(loose, 0, 0, 640, 480, null);
 		}
 	}
 
