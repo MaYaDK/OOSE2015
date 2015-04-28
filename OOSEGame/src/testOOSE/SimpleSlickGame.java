@@ -28,6 +28,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	Player p;
 	Sound s = new Sound();
 	Timer tm = new Timer(5, this); //For animation
+	private BufferedImage background; 
 	private BufferedImage won; 
 	private BufferedImage loose; 
 	
@@ -48,6 +49,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		
 	public SimpleSlickGame()
 	{
+		
 		//Declaring the classes.
 		b = new Ball(); 
 		bl = new Block();
@@ -60,6 +62,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		try{
 			won = ImageIO.read(new File("src/testOOSE/3FYIF00Z.jpg"));
 			loose =ImageIO.read(new File("src/testOOSE/fat.jpg"));
+			background = ImageIO.read(new File("src/testOOSE/beer.jpg"));
 		}catch(IOException ex){
 		}
 	}
@@ -67,6 +70,8 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		g.drawImage(background, 0, 0, 640, 480, null);
+		
 		b.drawBall(g); //Receiving the draw Ball method from Ball class.
 		p.drawPlayer(g);
 		
