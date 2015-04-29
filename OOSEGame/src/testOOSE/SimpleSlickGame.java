@@ -60,9 +60,9 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys	
 		
 		try{
-			won = ImageIO.read(new File("src/testOOSE/3FYIF00Z.jpg"));
-			loose =ImageIO.read(new File("src/testOOSE/fat.jpg"));
-			background = ImageIO.read(new File("src/testOOSE/beer.jpg"));
+			won = ImageIO.read(getClass().getResource("/3FYIF00Z.jpg"));
+			loose = ImageIO.read(getClass().getResource("/fat.jpg"));
+			background = ImageIO.read(getClass().getResource("/beer.jpg"));
 		}catch(IOException ex){
 		}
 	}

@@ -26,7 +26,8 @@ public class Ball
     	s = new Sound(); //declare class
     			
     	try{
-			ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
+			//ball = ImageIO.read(new File("src/testOOSE/Ball.png"));
+			ball = ImageIO.read(getClass().getResource("/Ball.png"));
 		}catch(IOException ex){
 		}
     }
