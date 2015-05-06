@@ -20,7 +20,7 @@ public class Block
 	//Row 1
 	public void drawBlock1(Graphics g)
 	{
-		g.setColor(Color.BLACK);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(blockPlaceX1, blockPlaceY1, blockwidth, blockheight);          
 	}
 	public void drawBlock2(Graphics g)
@@ -43,7 +43,6 @@ public class Block
     //Row 2
 	public void drawBlock6(Graphics g)
 	{
-		g.setColor(Color.DARK_GRAY);
 		g.fillRect(blockPlaceX1_2, blockPlaceY1_2, blockwidth, blockheight);
 	}
 	public void drawBlock7(Graphics g)

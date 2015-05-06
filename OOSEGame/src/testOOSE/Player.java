@@ -10,7 +10,7 @@ public class Player
 	public void drawPlayer(Graphics g)
 	{
 		//Draw player
-		g.setColor(Color.BLUE);
+		g.setColor(Color.RED);
 		g.fillRect(xRect,yRect,rectWidth,rectHeight);
 	
 	}

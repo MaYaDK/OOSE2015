@@ -13,11 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 //Access graphics
-import java.awt.Color;
 import java.awt.Graphics;
-import java.io.File;
 import java.io.IOException;
 
 public class SimpleSlickGame extends JPanel implements ActionListener, KeyListener
@@ -60,9 +57,9 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 		setFocusTraversalKeysEnabled(false); //Wont be using shift, tab.. keys	
 		
 		try{
-			won = ImageIO.read(getClass().getResource("/3FYIF00Z.jpg"));
-			loose = ImageIO.read(getClass().getResource("/fat.jpg"));
-			background = ImageIO.read(getClass().getResource("/beer.jpg"));
+			won = ImageIO.read(getClass().getResource("/win.jpg"));
+			loose = ImageIO.read(getClass().getResource("/lose.jpg"));
+			background = ImageIO.read(getClass().getResource("/wall.jpg"));
 		}catch(IOException ex){
 		}
 	}
@@ -114,7 +111,7 @@ public class SimpleSlickGame extends JPanel implements ActionListener, KeyListen
 			g.drawImage(won, 0, 0, 640, 480, null);
 		}
 		if(b.lifeCounter==0){
-			g.drawImage(loose, 0, 0, 640, 480, null);
+			g.drawImage(loose, 0, 0, 640-20, 480-20, null);
 		}
 	}
 
